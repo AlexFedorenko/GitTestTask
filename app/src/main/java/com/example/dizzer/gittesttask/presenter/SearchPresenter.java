@@ -3,6 +3,7 @@ package com.example.dizzer.gittesttask.presenter;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.dizzer.gittesttask.model.IRepositoriesList;
 import com.example.dizzer.gittesttask.model.ISearchResult;
 import com.example.dizzer.gittesttask.model.Organization;
 import com.example.dizzer.gittesttask.model.SearchResult;
@@ -28,10 +29,10 @@ public class SearchPresenter implements ISearchPresenter {
     private Call<Organization> result;
     private List<Organization> organizations;
 
-    public SearchPresenter(Context context, ISearchFragment fragment) {
+    public SearchPresenter(Context context, ISearchFragment searchFragment) {
         this.context = context;
-        this.searchFragment = fragment;
-        searchResult = new SearchResult();
+        this.searchFragment = searchFragment;
+        this.searchResult = new SearchResult();
     }
 
     @Override
@@ -43,7 +44,7 @@ public class SearchPresenter implements ISearchPresenter {
                 Log.d("Log.d", new Gson().toJson(response));
                 organizations = new ArrayList<>();
                 organizations.add(response.body());
-                if (response.body()!=null) searchFragment.showSearchResult(organizations);
+                if (response.body() != null) searchFragment.showSearchResult(organizations);
             }
 
             @Override

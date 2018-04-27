@@ -3,7 +3,6 @@ package com.example.dizzer.gittesttask.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.security.acl.Owner;
 
 /**
  * Created by Dizzer on 4/27/2018.

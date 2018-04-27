@@ -1,7 +1,9 @@
 package com.example.dizzer.gittesttask.presenter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 
 import com.example.dizzer.gittesttask.R;
 import com.example.dizzer.gittesttask.model.Organization;
+import com.example.dizzer.gittesttask.view.MainActivity;
+import com.example.dizzer.gittesttask.view.RepositoriesListFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -85,6 +89,24 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchRecycl
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    MainActivity activity = (MainActivity) view.getContext();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("name", itemList.get(getAdapterPosition()).getLogin());
+                    bundle.putString("companyName", itemList.get(getAdapterPosition()).getName());
+                    bundle.putString("repositoryCount", itemList.get(getAdapterPosition()).getPublicRepos().toString());
+                    FragmentManager fm = activity.getSupportFragmentManager();
+                    RepositoriesListFragment repositoryListFragment = new RepositoriesListFragment();
+                    repositoryListFragment.setArguments(bundle);
+                    fm.beginTransaction()
+                            .replace(R.id.container_main, repositoryListFragment)
+                            .addToBackStack("REPOSITORY")
+                            .commit();
+                    fm.executePendingTransactions();
+                }
+            });
         }
     }
 }
