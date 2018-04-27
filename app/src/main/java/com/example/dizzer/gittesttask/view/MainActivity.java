@@ -1,7 +1,9 @@
-package com.example.dizzer.gittesttask;
+package com.example.dizzer.gittesttask.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.dizzer.gittesttask.R;
 
 public class MainActivity extends AppCompatActivity {
 
